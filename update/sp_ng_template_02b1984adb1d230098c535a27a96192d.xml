@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>amaCard.html</id>
+        <sp_widget display_value="AMA Main">8d32040edbd9230098c535a27a961965</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-10-23 04:20:33</sys_created_on>
+        <sys_id>02b1984adb1d230098c535a27a96192d</sys_id>
+        <sys_mod_count>103</sys_mod_count>
+        <sys_name>amaCard.html</sys_name>
+        <sys_package display_value="Ask Me Anything Portal" source="x_snc_ama_portal">b3bab771dbd9230098c535a27a961968</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Ask Me Anything Portal">b3bab771dbd9230098c535a27a961968</sys_scope>
+        <sys_update_name>sp_ng_template_02b1984adb1d230098c535a27a96192d</sys_update_name>
+        <sys_updated_by>josh.soutar</sys_updated_by>
+        <sys_updated_on>2019-03-19 22:10:26</sys_updated_on>
+        <template><![CDATA[<div class="card panel panel-default {{card.type}}" ng-class="{'col-xs-12 col-sm-4': card.type =='event'}" >
+
+  <div ng-if="::card.type=='question'"
+       class="panel-body no_side_padding">
+    <div class="col-xs-1 col-md-1 vote text-center">
+      <a href
+         ng-click="c.up()">
+        <i class="fa fa-arrow-up fa-2x"
+           ng-class="{'active':card.up}"></i>
+      </a>
+      <div class="score">
+        {{ card.score }}
+      </div>
+      <a href
+         ng-click="c.down()">
+        <i class="fa fa-arrow-down fa-2x"
+           ng-class="{'active':card.down}"></i>
+      </a>
+    </div>
+    <div class="col-xs-11 col-md-11 card-title">
+      <h3>
+        {{ card.name }}
+      </h3>
+      
+      <div class="comments-section no_side_padding col-sm-6">
+        <a href 
+           ng-show="card.comments.length"
+           ng-click="c.show_comments = !c.show_comments"><span>
+          <i class="fa fa-comments"></i>
+          &nbsp;{{card.comments.length.toString() || "0"}}
+          <span id='comments_count_text'>&nbsp;comments</span>
+          </span></a>
+        <span ng-show="card.comments.length">&nbsp;|&nbsp;</span>
+        <a href ng-click="c.addComment()"><span>          
+          <i uib-tooltip="Add a comment" class="fa fa-pencil"></i>
+          <span>&nbsp;${Add a comment}</span>
+          </span></a>
+      </div>
+      <div class="bottom-descriptor col-sm-6">
+        <span id='question_timestamp'>
+          <span>
+            <i class="fa fa-calendar"></i>&nbsp;{{card.created}}
+          </span>
+          <span>&nbsp;|&nbsp;</span>
+        </span>
+        <span id='question_author'>
+          <i class="fa fa-user"></i>&nbsp;{{card.user}}
+        </span>
+      </div>
+      <div class="new-comments col-md-12" ng-show="c.show_add_comment">
+        <form class="form" ng-submit="c.postComment()">
+          <div class="form-group">
+            <textarea type="text" 
+                      placeholder="Add comment here" 
+                      class="form-control" 
+                      ng-model="c.newComment"
+                      ng-disabled="c.disable_comments">
+            </textarea>
+          </div>
+          <input class="btn btn-default pull-right" 
+                 type="submit" 
+                 value="{{c.disable_comments ? 'Submitting...' : 'Add Comment'}}"
+                 ng-disabled="c.disable_comments">
+        </form>
+      </div>
+      <div class="col-md-12 all-comments"
+           ng-show="c.show_comments">
+        <div class="comment"
+             ng-repeat="comment in card.comments | orderBy: '-when' track by comment.id">                    
+          
+          <div class='comment_background'>            
+            <strong class='comment_author'>{{comment.by}}</strong>
+            <div class='comment_text'>
+             {{comment.comment}}
+            </div>            
+          </div>
+          <div class='comment_timestamp'>
+             {{comment.when}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-if="::card.type=='event'"
+       class="panel-body event">
+    <a href="{{card.href}}">
+      <h3 class='event_name'>
+        {{ card.name }}
+      </h3>
+      <p>
+        {{ card.description }}
+      </p>
+      <div class='event_date'>
+        {{ card.date }}
+      </div>
+    </a>
+  </div> 
+</div>]]></template>
+    </sp_ng_template>
+</record_update>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>amaEventDetails.html</id>
+        <sp_widget display_value="AMA Main">8d32040edbd9230098c535a27a961965</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-05-08 23:27:36</sys_created_on>
+        <sys_id>c379b6e9241533007f442f8be240a137</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>amaEventDetails.html</sys_name>
+        <sys_package display_value="Ask Me Anything Portal" source="x_snc_ama_portal">b3bab771dbd9230098c535a27a961968</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Ask Me Anything Portal">b3bab771dbd9230098c535a27a961968</sys_scope>
+        <sys_update_name>sp_ng_template_c379b6e9241533007f442f8be240a137</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-05-08 23:27:36</sys_updated_on>
+        <template><![CDATA[<div>
+  <div ng-show="c.eventDetail">
+    <h1 class='event_name'>{{c.eventDetail.name}}</h1>
+    <hr>
+    <div class='event_description'>
+      <div uib-collapse="c.isCollapsed" ng-bind-html='c.eventDetail.description'></div>
+      <a href ng-click="c.isCollapsed = !c.isCollapsed">
+        {{c.isCollapsed ? 'Show Event Description' : 'Hide Event Description'}}&nbsp;
+        <i class="fa" ng-class="{'fa-plus-circle' : c.isCollapsed, 'fa-minus-circle' : !c.isCollapsed}"></i>
+      </a>
+    </div>
+
+  </div>    
+  <div class="ask-questions">
+    <button class="btn btn-primary btn-lg ask-btn"
+            ng-click="c.ask()">
+      <span class="glyphicon glyphicon-comment"></span>
+      <span class="hidden-xs" id="desktop_ask_question_btn_text">Ask a question</span>
+    </button>
+  </div>
+  <div ng-show="c.eventDetail.questions">
+    <div ng-repeat="question in c.eventDetail.questions | orderBy:'-score' track by question.id">
+      <ama-card card="question"></ama-card>
+    </div>
+  </div>
+  <div ng-show='c.eventDetail.questions.length == 0' class='no_questions'>
+    There currently aren't any questions for this event. Check back later, or ask a question by clicking the "Ask a question" button in the bottom-right corner.
+  </div>
+  <div ng-show="!c.eventDetail || c.eventQuestions">
+    <ama-loading loading="true"/>
+  </div>
+</div>]]></template>
+    </sp_ng_template>
+</record_update>

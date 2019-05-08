@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_ng_template">
+    <sp_ng_template action="INSERT_OR_UPDATE">
+        <id>askQuestion.html</id>
+        <sp_widget display_value="AMA Main">8d32040edbd9230098c535a27a961965</sp_widget>
+        <sys_class_name>sp_ng_template</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-05-08 23:29:47</sys_created_on>
+        <sys_id>d80a7ae9241533007f442f8be240a15d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>askQuestion.html</sys_name>
+        <sys_package display_value="Ask Me Anything Portal" source="x_snc_ama_portal">b3bab771dbd9230098c535a27a961968</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Ask Me Anything Portal">b3bab771dbd9230098c535a27a961968</sys_scope>
+        <sys_update_name>sp_ng_template_d80a7ae9241533007f442f8be240a15d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-05-08 23:29:47</sys_updated_on>
+        <template><![CDATA[<div class="modal-header ask-question-modal-header">
+  <h3 class="modal-title" style='color: black;' id="modal-title">Ask a new question</h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <div class="form-group-lg">
+      <textarea type="text"
+                class="form-control"
+                rows="4"
+                placeholder="Enter your question here."
+                ng-model="m.question"></textarea>
+    </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary btn-md" type="button" ng-click="m.ok()" ng-disabled="m.submitting">
+    <span ng-show="!m.submitting">Submit</span>
+    <span ng-show="m.submitting">Posting Question...&nbsp;<i class="fa fa-spin fa-spinner"></i></span>
+  </button>
+  <button class="btn btn-default btn-md" type="button" ng-click="m.cancel()" ng-hide="m.submitting">Cancel</button>
+</div>]]></template>
+    </sp_ng_template>
+</record_update>

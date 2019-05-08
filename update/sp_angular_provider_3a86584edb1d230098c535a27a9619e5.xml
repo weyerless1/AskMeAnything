@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_angular_provider">
+    <sp_angular_provider action="INSERT_OR_UPDATE">
+        <name>amaEventDetails</name>
+        <script><![CDATA[function() {
+  return {
+    controller: function($scope, $http, spUtil, $uibModal, spModal, $timeout) {
+      var c = this;
+      c.question = "";
+      c.firstLoad = true;
+      c.ask = function() {
+        if (c.eventDetail.locked == "true") {
+          spModal.alert("Sorry, this event has been locked.");
+          return;
+        }
+        //Create a modal that will contain the ask-question form
+        var modalInstance = $uibModal.open({
+          templateUrl: 'askQuestion.html',
+          controllerAs: "m",
+          controller: function($http) {
+            var m = this;
+            m.question = c.question;
+            m.ok = function() {
+              //Clicking the Submit button will trigger a call to the table API
+              m.submitting = true;
+              $http.post("/api/now/table/x_snc_ama_portal_question", {
+              /* Add 'event' and 'question' details within  allow the table API call so that the script
+                 knows which event this question is for and what the contents of the question is
+                */                
+                "event": c.eventDetail.id,
+                "question": m.question
+              }).then(function(r) {
+                m.submitting = false;
+                close(true);
+                c.question = "";
+              });
+            };
+            m.cancel = function() {
+              close(false);
+            };
+            function close(submit) {
+              c.question = m.question;
+              modalInstance.dismiss(submit?'submit':'cancel');
+            }
+          }
+        });
+      };
+      init();
+      //Record watchers
+      spUtil.recordWatch($scope, "x_snc_ama_portal_question", "", function(d) {
+        init();
+      });
+      spUtil.recordWatch($scope, "x_snc_ama_portal_comment", "", function(d) {
+        init();
+      });
+      spUtil.recordWatch($scope, "x_snc_ama_portal_event", "", function(d) {
+        init();
+      });
+      function init() {
+        /* During first page load and each time a record changes in the list of record watchers, 
+           trigger a rest call to get the latest data for this Event
+         */
+        $http.get("/api/x_snc_ama_portal/ama_portal/eventdetails?event=" + $scope.event)
+          .then(function(r) {
+          c.eventDetail = r.data.result;      
+        });
+      }
+    },
+    controllerAs: "c",
+    scope: {
+      event: "="
+    },
+    //Use amaEventDetails.html to display the data from this directive
+    templateUrl: "amaEventDetails.html"
+  };
+}]]></script>
+        <sys_class_name>sp_angular_provider</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-10-23 04:42:39</sys_created_on>
+        <sys_id>3a86584edb1d230098c535a27a9619e5</sys_id>
+        <sys_mod_count>53</sys_mod_count>
+        <sys_name>amaEventDetails</sys_name>
+        <sys_package display_value="Ask Me Anything Portal" source="x_snc_ama_portal">b3bab771dbd9230098c535a27a961968</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Ask Me Anything Portal">b3bab771dbd9230098c535a27a961968</sys_scope>
+        <sys_update_name>sp_angular_provider_3a86584edb1d230098c535a27a9619e5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-05-08 23:26:01</sys_updated_on>
+        <type>directive</type>
+    </sp_angular_provider>
+</record_update>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_angular_provider">
+    <sp_angular_provider action="INSERT_OR_UPDATE">
+        <name>amaCard</name>
+        <script><![CDATA[function() {
+	return {
+		controller: function($scope, $http) {
+			var c = this;
+			
+			$scope.card.score = parseInt($scope.card.score);
+			
+			c.addComment = function() {
+				c.show_add_comment = !c.show_add_comment;
+			};
+			
+			c.postComment = function() {
+				c.disable_comments = true;
+				$http.post("/api/now/table/x_snc_ama_portal_comment", {
+					"comment":  c.newComment,
+					"question": $scope.card.id
+				}).then(function(r) {
+					c.disable_comments = false;
+					c.show_add_comment = false;
+					c.newComment = "";
+					c.show_comments = true;
+				});
+			};
+			
+			//Upvote and downvote functionality
+			c.up = function() {
+				//Undo upvote
+				if ($scope.card.up) {
+					$scope.card.up = false;
+					$scope.card.down = false;
+					$scope.card.score -= 1;
+					//Undo downvote and apply upvote
+				} else if ($scope.card.down) {
+					$scope.card.down = false;
+					$scope.card.up = true;
+					$scope.card.score += 2;
+					//Upvote
+				} else {
+					$scope.card.down = false;
+					$scope.card.up = true;
+					$scope.card.score += 1;
+				}
+				updateScore();
+			};
+			
+			c.down = function() {
+				//Undo downvote
+				if ($scope.card.down) {
+					$scope.card.down = false;
+					$scope.card.up = false;
+					$scope.card.score += 1;
+					//Undo upvote and do downvote
+				} else if ($scope.card.up) {
+					$scope.card.up = false;
+					$scope.card.down = true;
+					$scope.card.score -= 2;
+					//Downvote
+				} else {
+					$scope.card.up = false;
+					$scope.card.down = true;
+					$scope.card.score -= 1;
+				}
+				updateScore();
+			};
+			
+			function updateScore() {
+				var myScore = 0;
+				//Upvote
+				if ($scope.card.up) {
+					myScore = 1;
+				}
+				//Downvote
+				else if ($scope.card.down) {
+					myScore = -1;
+				}
+				
+				//Call scripted REST API to apply the updated vote
+				$http.post("/api/x_snc_ama_portal/ama_portal/updatemyvote?question=" + $scope.card.id + "&score=" + myScore)
+				.then(function(r) {
+					console.log(r);
+				});
+			}
+			
+			
+		},
+		scope: {
+			card: "="
+		},
+		templateUrl: "amaCard.html",
+		controllerAs: "c"
+	};
+}]]></script>
+        <sys_class_name>sp_angular_provider</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-10-23 03:21:53</sys_created_on>
+        <sys_id>2534c4cedbd9230098c535a27a961947</sys_id>
+        <sys_mod_count>43</sys_mod_count>
+        <sys_name>amaCard</sys_name>
+        <sys_package display_value="Ask Me Anything Portal" source="x_snc_ama_portal">b3bab771dbd9230098c535a27a961968</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Ask Me Anything Portal">b3bab771dbd9230098c535a27a961968</sys_scope>
+        <sys_update_name>sp_angular_provider_2534c4cedbd9230098c535a27a961947</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-05-08 23:35:33</sys_updated_on>
+        <type>directive</type>
+    </sp_angular_provider>
+</record_update>

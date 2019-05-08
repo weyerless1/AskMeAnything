@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function(spUtil, $scope, $location) {
+  var c = this;	
+	
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.ask-questions {&#13;
+  padding-bottom: 20px;&#13;
+  padding-top: 10px;&#13;
+}&#13;
+&#13;
+.card.panel.event:hover {&#13;
+  box-shadow: 0 4px 13px rgba(0, 0, 0, .1);&#13;
+}&#13;
+&#13;
+.card.panel.question {&#13;
+  box-shadow: 0 4px 13px rgba(0, 0, 0, .1);&#13;
+}&#13;
+&#13;
+.card.panel {&#13;
+  border-radius: 0;  &#13;
+}&#13;
+&#13;
+.card {&#13;
+  .vote {&#13;
+    i {&#13;
+      color: $gray;&#13;
+    }&#13;
+    i.fa-arrow-up:hover {&#13;
+      color: $success;&#13;
+    }&#13;
+    i.fa-arrow-down:hover {&#13;
+      color: $danger;&#13;
+    }&#13;
+    i.active {&#13;
+      color: $primary;&#13;
+    }&#13;
+    .score {&#13;
+      font-size: 20px;&#13;
+      line-height: 35px;&#13;
+    }&#13;
+  }&#13;
+  .bottom-descriptor, .comments-section {&#13;
+    span {&#13;
+      padding-right: 10px;&#13;
+    }&#13;
+    i {&#13;
+      padding-right: 5px;&#13;
+    }&#13;
+  }&#13;
+  .bottom-descriptor {&#13;
+    text-align: right;&#13;
+  }&#13;
+  .new-comments {&#13;
+    padding-top: 10px;&#13;
+  }&#13;
+  .all-comments {&#13;
+    padding-top: 10px;&#13;
+    .comment {&#13;
+      padding-top: 5px;&#13;
+      padding-bottom: 5px;&#13;
+    }&#13;
+  }&#13;
+}&#13;
+&#13;
+h1.event_select, h1.event_name {&#13;
+  font-weight: 600;&#13;
+  color: black;&#13;
+}&#13;
+&#13;
+.card.event {&#13;
+  position: relative;&#13;
+  padding: 0 15px;&#13;
+  float: left;&#13;
+  height: 185px;&#13;
+}&#13;
+&#13;
+.event_name {&#13;
+  margin-top: 10px;&#13;
+}&#13;
+&#13;
+.event_date {&#13;
+  position: absolute;&#13;
+  bottom: 10px;&#13;
+  color: grey;&#13;
+}&#13;
+&#13;
+.ask-questions {&#13;
+  position: fixed;&#13;
+  bottom: 50px;&#13;
+  right: 40px;&#13;
+  z-index: 100;&#13;
+&#13;
+}&#13;
+&#13;
+@media only screen and (max-width: 600px) {&#13;
+  .ask-questions {&#13;
+    bottom: 10px;&#13;
+    right: 10px;&#13;
+&#13;
+  }&#13;
+}&#13;
+&#13;
+.ask-btn {&#13;
+  border: none;&#13;
+  border-radius: 40px;&#13;
+  -webkit-box-shadow: 0px 5px 10px rgba(0, 0, 0, .2);&#13;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, .2);&#13;
+  color: #fff;&#13;
+  display: inline-flex;&#13;
+  height: 55px;&#13;
+  justify-content: center;&#13;
+  position: relative;  &#13;
+}&#13;
+&#13;
+.ask-btn .glyphicon {&#13;
+  font-size: 23px;&#13;
+}&#13;
+&#13;
+#desktop_ask_question_btn_text {&#13;
+  margin-left: 10px;&#13;
+}&#13;
+&#13;
+.card .new-comments {&#13;
+  z-index: 75;&#13;
+}&#13;
+&#13;
+.card .all-comments {&#13;
+  z-index: 50;&#13;
+}&#13;
+&#13;
+.comments-section, .bottom-descriptor {&#13;
+  z-index: 85;   &#13;
+}&#13;
+&#13;
+.comment_author {&#13;
+  float: left;&#13;
+  padding-right: 6px;&#13;
+}&#13;
+&#13;
+.comment_background {&#13;
+  background-color: #f2f3f5;&#13;
+  border-radius: 20px;&#13;
+  box-sizing: border-box;&#13;
+  color: #1c1e21;&#13;
+  display: inline-block;&#13;
+  font-size: 13px;&#13;
+  line-height: 16px;&#13;
+  margin: 0;&#13;
+  max-width: 100%;&#13;
+  word-wrap: break-word;&#13;
+  white-space: normal;&#13;
+  word-break: break-word;&#13;
+  padding: 10px;&#13;
+}&#13;
+&#13;
+.comment_text {&#13;
+  float: left;&#13;
+}&#13;
+&#13;
+.comment_timestamp {&#13;
+  padding-left: 10px;&#13;
+  font-size: 13px;&#13;
+}&#13;
+&#13;
+.card-title h3 {&#13;
+  color: black;&#13;
+}&#13;
+&#13;
+.no_side_padding {&#13;
+  padding-left: 0px;&#13;
+  padding-right: 0px;&#13;
+}&#13;
+&#13;
+.event_description {&#13;
+  margin-bottom: 20px;&#13;
+}&#13;
+&#13;
+.event_description a {&#13;
+  font-weight: bold;&#13;
+}&#13;
+&#13;
+ama-loading {&#13;
+  font-size: 35px;&#13;
+  text-align: center;&#13;
+  padding: 50px;&#13;
+}&#13;
+&#13;
+.no_questions {&#13;
+  color: black;&#13;
+  font-weight: 700;&#13;
+  text-align: center;&#13;
+  border-top: 1px solid #eeeeee;&#13;
+  padding: 20px 55px 0px 55px;&#13;
+}&#13;
+&#13;
+@media(max-width: 768px) {  &#13;
+  .card .all-comments {&#13;
+    margin-top: 20px;&#13;
+  }&#13;
+  .event_description {&#13;
+    padding: 0px 10px;&#13;
+  }&#13;
+  .no_questions {    &#13;
+    padding: 20px;&#13;
+  }&#13;
+  .card.panel.event {&#13;
+    height: 115px;&#13;
+    padding: 0px;&#13;
+    margin-bottom: 10px;&#13;
+  }    &#13;
+  .card.panel.question {&#13;
+    margin-bottom: -1px;&#13;
+    border-right: 0px;&#13;
+    border-left: 0px;&#13;
+  }&#13;
+  .card .vote i {&#13;
+    font-size: 23px;&#13;
+	}&#13;
+  .card-title h3, .event_name {&#13;
+    font-size: 18px;&#13;
+    margin-top: 10px;    &#13;
+  }&#13;
+  .card-title h3 {&#13;
+    margin-top: 0px;&#13;
+  }&#13;
+  .event_name {&#13;
+    font-weight: 600; &#13;
+  }&#13;
+  .event_date {&#13;
+    font-size: 13px;&#13;
+  }&#13;
+  .ask-questions {&#13;
+    padding: 0px;&#13;
+  }&#13;
+  .comments-section {&#13;
+    display: inline-block;&#13;
+    padding: 0px;&#13;
+    float: left;&#13;
+  }&#13;
+  .card .comments-section span {&#13;
+    padding-right: 5px;&#13;
+  }&#13;
+  #comments_count_text {&#13;
+    display: none;&#13;
+  }&#13;
+  #question_timestamp {&#13;
+    display: none;&#13;
+  }&#13;
+  #question_author {&#13;
+    display: inline-block;&#13;
+    float: right;&#13;
+  }&#13;
+  .card .new-comments {&#13;
+    margin: 30px 0px;&#13;
+  }&#13;
+  .bottom-descriptor {&#13;
+    padding: 0px;&#13;
+    text-align: left;&#13;
+  }&#13;
+  .vote {&#13;
+    padding: 0px;&#13;
+  }&#13;
+  h1.event_name {    &#13;
+    font-size: 30px;&#13;
+    text-align: center;&#13;
+  }&#13;
+  h1.event_select {&#13;
+    margin: 0px 0px 0px 10px;    &#13;
+  }	&#13;
+  .card .bottom-descriptor {&#13;
+    text-align: left;&#13;
+  }  &#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>true</has_preview>
+        <id>ama_main</id>
+        <internal>false</internal>
+        <link/>
+        <name>AMA Main</name>
+        <option_schema/>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  //Set 'data.event' to the value of the 'event' URL parameter
+  data.event = $sp.getParameter("event");
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-10-23 03:12:07</sys_created_on>
+        <sys_id>8d32040edbd9230098c535a27a961965</sys_id>
+        <sys_mod_count>195</sys_mod_count>
+        <sys_name>AMA Main</sys_name>
+        <sys_package display_value="Ask Me Anything Portal" source="x_snc_ama_portal">b3bab771dbd9230098c535a27a961968</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Ask Me Anything Portal">b3bab771dbd9230098c535a27a961968</sys_scope>
+        <sys_update_name>sp_widget_8d32040edbd9230098c535a27a961965</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-05-08 23:23:06</sys_updated_on>
+        <template><![CDATA[<div>
+
+  <div ng-if="!c.data.event">
+    <ama-event-select/>
+  </div>
+  
+  <div ng-if="c.data.event">
+    <ama-event-details event="c.data.event"></ama-event-details>
+    <div ng-repeat="card in c.data.cards track by card.sys_id">
+      <ama-card card="card"/>
+    </div>
+  </div>
+  
+</div>]]></template>
+    </sp_widget>
+</record_update>
